@@ -1,7 +1,5 @@
 CREATE DATABASE Capitales;
-
 USE Capitales;
-
 CREATE TABLE Ciudades (
     id INT AUTO_INCREMENT PRIMARY KEY,
     ciudad VARCHAR(100),
