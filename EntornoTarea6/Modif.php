@@ -19,3 +19,13 @@ if ($_POST) {
     echo "Ciudad modificada.";
 }
 ?>
+<div style="text-align:center; margin-top:20px;">
+    <a href="Index.html" style="
+        text-decoration:none;
+        padding:10px 20px;
+        background-color:#007BFF;
+        color:white;
+        border-radius:5px;
+        font-family:sans-serif;
+    ">Volver al Menú Principal</a>
+</div>
