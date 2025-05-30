@@ -4,7 +4,7 @@
     País: <input type="text" name="pais"><br>
     Habitantes: <input type="number" name="habitantes"><br>
     Superficie: <input type="text" name="superficie"><br>
-    Tiene Metro: <input type="number" name="tieneMetro" min="0" max=""><br>
+    Tiene Metro: <input type="number" name="tieneMetro" min="0" max="4"><br>
     <input type="submit" value="Agregar">
 </form>
 
