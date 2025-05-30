@@ -1,22 +1,32 @@
 <?php include("Conexion.php"); ?>
+
 <form method="post">
     Ciudad: <input type="text" name="ciudad"><br>
-    País: <input type="text" name="pais"><br>
+    Pais: <input type="text" name="pais"><br>
     Habitantes: <input type="number" name="habitantes"><br>
     Superficie: <input type="text" name="superficie"><br>
-    Tiene Metro: <input type="number" name="tieneMetro" min="0" max="4"><br>
+    TieneMetro: <input type="number" name="tieneMetro" min="0" max="4"><br>
     <input type="submit" value="Agregar">
 </form>
 
 <?php
-if ($_POST) {
-    $sql = "INSERT INTO Ciudades (ciudad, país, habitantes, superficie, tieneMetro)
-            VALUES ('$_POST[ciudad]', '$_POST[pais]', $_POST[habitantes], $_POST[superficie], $_POST[tieneMetro])";
-    $conexion->query($sql);
-    echo "Ciudad agregada.";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $ciudad = $_POST['ciudad'] ?? '';
+    $pais = $_POST['pais'] ?? '';
+    $habitantes = $_POST['habitantes'] ?? 0;
+    $superficie = $_POST['superficie'] ?? 0;
+    $tieneMetro = isset($_POST['tieneMetro']) ? $_POST['tieneMetro'] : 0;
+
+    $sql = "INSERT INTO Ciudades (ciudad, pais, habitantes, superficie, tieneMetro)
+            VALUES ('$ciudad', '$pais', $habitantes, $superficie, $tieneMetro)";
+
+    if ($conexion->query($sql)) {
+        echo "Ciudad agregada.";
+    } else {
+        echo "Error: " . $conexion->error;
+    }
 }
 ?>
-
 <div style="text-align:center; margin-top:20px;">
     <a href="Index.html" style="
         text-decoration:none;

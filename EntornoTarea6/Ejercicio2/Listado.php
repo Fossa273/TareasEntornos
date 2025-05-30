@@ -1,9 +1,14 @@
-<?php include("Conexion.php"); ?>
+<?php
+include("Conexion.php"); 
+$vSql = "SELECT * FROM Ciudades";
+$vResultado = mysqli_query($conexion, $vSql);
+$total_registros = mysqli_num_rows($vResultado);
+?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Listado de Ciudades</title>
+    <title>Listado completo</title>
     <style>
         table {
             border-collapse: collapse;
@@ -19,9 +24,8 @@
             background-color: #ccc;
         }
         .menu-button {
-            display: block;
-            margin: 20px auto;
             text-align: center;
+            margin-top: 20px;
         }
         .menu-button a {
             text-decoration: none;
@@ -39,38 +43,43 @@
 
 <h2 style="text-align:center;">Listado de Ciudades</h2>
 
-<?php
-$resultado = $conexion->query("SELECT * FROM Ciudades");
+<?php if ($total_registros > 0): ?>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Ciudad</th>
+            <th>País</th>
+            <th>Habitantes</th>
+            <th>Superficie</th>
+            <th>Tiene Metro</th>
+        </tr>
+        <?php while ($fila = mysqli_fetch_array($vResultado)): ?>
+        <tr>
+            <td><?php echo $fila['id']; ?></td>
+            <td><?php echo $fila['ciudad']; ?></td>
+            <td><?php echo $fila['pais']; ?></td>
+            <td><?php echo $fila['habitantes']; ?></td>
+            <td><?php echo $fila['superficie']; ?></td>
+            <td><?php echo ($fila['tieneMetro'] ? 'Sí' : 'No'); ?></td>
+        </tr>
+        <?php endwhile; ?>
+    </table>
+<?php else: ?>
+    <p style="text-align:center;">No hay ciudades registradas.</p>
+<?php endif; ?>
 
-if ($resultado->num_rows > 0) {
-    echo "<table>
-            <tr>
-                <th>ID</th>
-                <th>Ciudad</th>
-                <th>País</th>
-                <th>Habitantes</th>
-                <th>Superficie</th>
-                <th>Tiene Metro</th>
-            </tr>";
-    while ($fila = $resultado->fetch_assoc()) {
-        echo "<tr>
-                <td>{$fila['id']}</td>
-                <td>{$fila['ciudad']}</td>
-                <td>{$fila['país']}</td>
-                <td>{$fila['habitantes']}</td>
-                <td>{$fila['superficie']}</td>
-                <td>" . ($fila['tieneMetro'] ? 'Sí' : 'No') . "</td>
-              </tr>";
-    }
-    echo "</table>";
-} else {
-    echo "<p style='text-align:center;'>No hay ciudades registradas.</p>";
-}
+<?php
+mysqli_free_result($vResultado);
+mysqli_close($conexion);
 ?>
 
-<div class="menu-button">
-    <a href="Index.html">Volver al Menu Principal</a>
+<div style="text-align:center; margin-top:20px;">
+    <a href="Index.html" style="
+        text-decoration:none;
+        padding:10px 20px;
+        background-color:#007BFF;
+        color:white;
+        border-radius:5px;
+        font-family:sans-serif;
+    ">Volver al Menu Principal</a>
 </div>
-
-</body>
-</html>
