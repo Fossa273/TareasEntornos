@@ -69,7 +69,7 @@ if ($resultado->num_rows > 0) {
 ?>
 
 <div class="menu-button">
-    <a href="Index.html">Volver al Menú Principal</a>
+    <a href="Index.html">Volver al Menu Principal</a>
 </div>
 
 </body>

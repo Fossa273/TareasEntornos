@@ -25,5 +25,5 @@ if ($_POST) {
         color:white;
         border-radius:5px;
         font-family:sans-serif;
-    ">Volver al Menú Principal</a>
+    ">Volver al Menu Principal</a>
 </div>
